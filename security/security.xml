@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Category for menu organization -->
+        <record id="module_category_disciplinary" model="ir.module.category">
+            <field name="name">Disciplinary</field>
+            <field name="description">Manage employee disciplinary actions</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Manager Group -->
+        <record id="group_disciplinary_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_disciplinary"/>
+            <!-- Implies basic internal user -->
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- User Group -->
+        <record id="group_disciplinary_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_disciplinary"/>
+            <!-- Implies basic internal user -->
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

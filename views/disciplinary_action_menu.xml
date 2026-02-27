@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Root Menu under Employees App -->
+        <menuitem id="menu_hr_disciplinary_root"
+                  name="Disciplinary Actions"
+                  parent="hr.menu_hr_root"
+                  sequence="25"/>
+
+        <!-- Disciplinary Cases Menu -->
+        <menuitem id="menu_hr_disciplinary_cases"
+                  name="Disciplinary Cases"
+                  parent="menu_hr_disciplinary_root"
+                  action="action_hr_disciplinary_action"
+                  sequence="1"/>
+
+        <!-- Reporting Sub-menu -->
+        <menuitem id="menu_hr_disciplinary_reporting"
+                  name="Reporting"
+                  parent="menu_hr_disciplinary_root"
+                  sequence="10"/>
+
+        <!-- Discipline Report under Employee -> Reporting -->
+        <menuitem id="menu_hr_disciplinary_report"
+                  name="Discipline Report"
+                  parent="hr.hr_menu_hr_reports"
+                  action="action_hr_disciplinary_action"
+                  sequence="20"/>
+
+    </data>
+</odoo>

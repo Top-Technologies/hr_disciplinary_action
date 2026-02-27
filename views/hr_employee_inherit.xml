@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Employee Form: Add Disciplinary Cases Smart Button -->
+        <record id="view_hr_employee_disciplinary_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.disciplinary.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_open_disciplinary_actions"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-gavel"
+                            invisible="disciplinary_action_count == 0">
+                        <field name="disciplinary_action_count"
+                               widget="statinfo"
+                               string="Disciplinary Cases"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Employee Kanban: Add Disciplinary Badges -->
+        <record id="view_hr_employee_kanban_disciplinary_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.kanban.disciplinary.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="arch" type="xml">
+                <xpath expr="//footer" position="before">
+                    <div class="mt-1">
+                        <field name="verbal_count" invisible="1"/>
+                        <field name="written_count" invisible="1"/>
+                        <field name="last_count" invisible="1"/>
+                        
+                        <span t-if="record.verbal_count.raw_value &gt; 0" 
+                              class="badge rounded-pill bg-success me-1" 
+                              title="Verbal Warning">
+                            <i class="fa fa-gavel me-1"/> <field name="verbal_count"/> Verbal
+                        </span>
+                        <span t-if="record.written_count.raw_value &gt; 0" 
+                              class="badge rounded-pill bg-warning me-1 text-dark" 
+                              title="Second Written Warning">
+                            <i class="fa fa-gavel me-1"/> <field name="written_count"/> Written
+                        </span>
+                        <span t-if="record.last_count.raw_value &gt; 0" 
+                              class="badge rounded-pill bg-danger me-1" 
+                              title="Last Written Warning">
+                            <i class="fa fa-gavel me-1"/> <field name="last_count"/> Last
+                        </span>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
