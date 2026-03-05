@@ -35,10 +35,10 @@ class HrDisciplinaryAction(models.Model):
         default=fields.Date.today,
         tracking=True,
     )
-    # ── Incident Details Tab ──────────────────────────────────────────────────
+
     action_type = fields.Selection(
         selection=[
-            ('misconduct', 'Misconduct'),
+            ('misconduct', 'Misbehavior'),
             ('absenteeism', 'Absenteeism'),
             ('insubordination', 'Insubordination'),
             ('negligence', 'Negligence'),
@@ -58,7 +58,7 @@ class HrDisciplinaryAction(models.Model):
     )
     incident_description = fields.Text(string='Incident Description')
 
-    # ── Investigation Tab ─────────────────────────────────────────────────────
+
     investigation_notes = fields.Text(string='Investigation Notes')
     attachment_ids = fields.Many2many(
         comodel_name='ir.attachment',
@@ -68,16 +68,17 @@ class HrDisciplinaryAction(models.Model):
         string='Attachments',
     )
 
-    # ── Employee Response Tab ─────────────────────────────────────────────────
+
     employee_response = fields.Text(string='Employee Response')
     response_date = fields.Date(string='Response Date')
 
-    # ── Decision Tab ──────────────────────────────────────────────────────────
+
     decision = fields.Selection(
         selection=[
             ('verbal', 'Verbal  Written Warning'),
             ('written', 'Second Written Warning'),
             ('last', 'Last Written Warning'),
+            ('suspension', 'Suspension'),
         ],
         string='Decision',
         tracking=True,
@@ -85,9 +86,7 @@ class HrDisciplinaryAction(models.Model):
     decision_date = fields.Date(string='Decision Date')
     decision_notes = fields.Text(string='Decision Notes')
 
-    # ─────────────────────────────────────────────────────────────────────────
-    # ORM Overrides
-    # ─────────────────────────────────────────────────────────────────────────
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

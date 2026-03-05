@@ -19,7 +19,8 @@
                     <field name="decision" string="Decision" widget="badge"
                            decoration-success="decision == 'verbal'"
                            decoration-warning="decision == 'written'"
-                           decoration-danger="decision == 'last'"/>
+                           decoration-danger="decision == 'last'"
+                           decoration-info="decision == 'suspension'"/>
                 </list>
             </field>
         </record>
@@ -121,6 +122,9 @@
                     <filter name="filter_last"
                             string="Last Written Warning"
                             domain="[('decision', '=', 'last')]"/>
+                     <filter name="suspension"
+                            string="Suspension"
+                            domain="[('decision', '=', 'suspension')]"/>
 
                     <separator/>
 

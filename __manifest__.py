@@ -1,7 +1,7 @@
 {
     'name': 'Disciplinary Actions',
     'version': '18.0.1.0.0',
-    'author': 'Yohannes Shiwerekey',
+    'author': 'Top Technologies',
     'category': 'Human Resources',
     'summary': 'Manage employee disciplinary cases with decision-based tracking',
     'description': """
