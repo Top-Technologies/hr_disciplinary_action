@@ -78,7 +78,7 @@ class HrDisciplinaryAction(models.Model):
             ('verbal', 'Verbal  Written Warning'),
             ('written', 'Second Written Warning'),
             ('last', 'Last Written Warning'),
-            ('Suspension', 'Suspension'),
+            ('suspension', 'Suspension'),
         ],
         string='Decision',
         tracking=True,

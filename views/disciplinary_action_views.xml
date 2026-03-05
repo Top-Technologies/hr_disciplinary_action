@@ -124,7 +124,7 @@
                             domain="[('decision', '=', 'last')]"/>
                      <filter name="suspension"
                             string="Suspension"
-                            domain="[('decision', '=', 'Suspension')]"/>
+                            domain="[('decision', '=', 'suspension')]"/>
 
                     <separator/>
 

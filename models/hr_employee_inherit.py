@@ -12,6 +12,7 @@ class HrEmployee(models.Model):
     verbal_count = fields.Integer(string='Verbal Warnings', compute='_compute_decision_counts')
     written_count = fields.Integer(string='Second Written Warnings', compute='_compute_decision_counts')
     last_count = fields.Integer(string='Last Written Warnings', compute='_compute_decision_counts')
+    suspension_count = fields.Integer(string='Suspension', compute='_compute_decision_counts')
 
     disciplinary_action_count = fields.Integer(
         string='Disciplinary Cases Count',
@@ -24,6 +25,7 @@ class HrEmployee(models.Model):
             employee.verbal_count = 0
             employee.written_count = 0
             employee.last_count = 0
+            employee.suspension_count = 0
             employee.disciplinary_action_count = 0
 
         # Efficiently read counts grouped by employee and decision
@@ -47,6 +49,8 @@ class HrEmployee(models.Model):
                 employee.written_count = count
             elif decision == 'last':
                 employee.last_count = count
+            elif decision == 'suspension':
+                employee.suspension_count= count
 
     def action_open_disciplinary_actions(self):
         self.ensure_one()

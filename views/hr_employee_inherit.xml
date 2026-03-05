@@ -32,6 +32,7 @@
                         <field name="verbal_count" invisible="1"/>
                         <field name="written_count" invisible="1"/>
                         <field name="last_count" invisible="1"/>
+                        <field name="suspension_count" invisible="1"/>
                         
                         <span t-if="record.verbal_count.raw_value &gt; 0" 
                               class="badge rounded-pill bg-success me-1" 
@@ -47,6 +48,11 @@
                               class="badge rounded-pill bg-danger me-1" 
                               title="Last Written Warning">
                             <i class="fa fa-gavel me-1"/> <field name="last_count"/> Last
+                        </span>
+                        <span t-if="record.suspension_count.raw_value &gt; 0"
+                              class="badge rounded-pill bg-primary me-1"
+                              title="Suspension">
+                            <i class="fa fa-gavel me-1"/> <field name="suspension_count"/> Suspension
                         </span>
                     </div>
                 </xpath>
