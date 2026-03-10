@@ -49,8 +49,8 @@ class HrEmployee(models.Model):
                 employee.written_count = count
             elif decision == 'last':
                 employee.last_count = count
-            elif decision == 'suspension':
-                employee.suspension_count= count
+            elif decision=='suspension':
+                employee.suspension_count = count
 
     def action_open_disciplinary_actions(self):
         self.ensure_one()
