@@ -78,7 +78,7 @@ class HrDisciplinaryAction(models.Model):
             ('verbal', 'Verbal  Written Warning'),
             ('written', 'Second Written Warning'),
             ('last', 'Last Written Warning'),
-            ('Suspension', 'Suspension'),
+            ('suspension', 'Suspension'),
         ],
         string='Decision',
         tracking=True,
@@ -94,4 +94,22 @@ class HrDisciplinaryAction(models.Model):
                 vals['name'] = self.env['ir.sequence'].next_by_code(
                     'hr.disciplinary.action'
                 ) or 'New'
-        return super().create(vals_list)
+        
+        records = super().create(vals_list)
+        
+        # Notify employees by scheduling an activity
+        for record in records:
+            if record.employee_id.user_id:
+                # Subscribe the employee to the record
+                record.message_subscribe(partner_ids=[record.employee_id.user_id.partner_id.id])
+                
+                # Schedule an activity for the employee
+                record.activity_schedule(
+                    'mail.mail_activity_data_todo',
+                    user_id=record.employee_id.user_id.id,
+                    summary=_('New Disciplinary Action: %s', record.name),
+                    note=_('A new disciplinary action has been filed. Please review the details.'),
+                    date_deadline=fields.Date.context_today(record),
+                )
+                
+        return records

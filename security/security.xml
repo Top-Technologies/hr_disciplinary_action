@@ -23,5 +23,22 @@
             <!-- Implies basic internal user -->
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
+
+        <!-- Record Rules -->
+        <!-- Employee can only see their own disciplinary actions -->
+        <record id="rule_disciplinary_action_employee" model="ir.rule">
+            <field name="name">Employee Disciplinary Actions</field>
+            <field name="model_id" ref="model_hr_disciplinary_action"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Manager/HR User can see all disciplinary actions -->
+        <record id="rule_disciplinary_action_hr_all" model="ir.rule">
+            <field name="name">All Disciplinary Actions</field>
+            <field name="model_id" ref="model_hr_disciplinary_action"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('hr_disciplinary_action.group_disciplinary_user')), (4, ref('hr_disciplinary_action.group_disciplinary_manager'))]"/>
+        </record>
     </data>
 </odoo>
